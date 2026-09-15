@@ -1,12 +1,15 @@
 import TodoItem from "./TodoItem";
 
-export default function TodoList(){
+export default function TodoList({todos}){
 
      return (
     <div className="todo-list">
-      <TodoItem title="Learn Node.js" />
-      <TodoItem title="Build Todo API" />
-      <TodoItem title="Complete calculator project" />
+      {todos.map((todo) => (
+        <TodoItem
+          key={todo.id}
+          title={todo.title}
+        />
+      ))}
     </div>
   );
 }
