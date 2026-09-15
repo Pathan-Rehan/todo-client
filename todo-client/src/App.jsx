@@ -1,15 +1,15 @@
-
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
 
 function App() {
-
-
   return (
     <>
-      <div >Welcome to the Todo App</div>
+      <h1>Todo App</h1>
 
-
+      <TodoForm />
+      <TodoList />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
