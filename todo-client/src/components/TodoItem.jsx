@@ -1,8 +1,15 @@
-export default function TodoItem(){
+export default function TodoItem({title}) {
 
-     return(
+     return (
           <>
-          <div>Todo Item</div>
+               <div className="todo-item">
+                    <input type="checkbox" />
+
+                    <span>{title}</span>
+
+                    <button>Edit</button>
+                    <button>Delete</button>
+               </div>
           </>
      )
 }

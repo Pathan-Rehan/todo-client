@@ -1,8 +1,15 @@
-export default function TodoForm(){
+export default function TodoForm() {
 
-     return(
+     return (
           <>
-          <div>Todo Form</div>
+               <div className="todo-form">
+                    <input
+                         type="text"
+                         placeholder="Enter a task..."
+                    />
+
+                    <button>Add</button>
+               </div>
           </>
      )
 }
