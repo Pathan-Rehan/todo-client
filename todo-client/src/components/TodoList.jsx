@@ -1,6 +1,6 @@
 import TodoItem from "./TodoItem";
 
-export default function TodoList({todos}){
+export default function TodoList({todos, onToggleTodo}){
 
      return (
     <div className="todo-list">
@@ -8,6 +8,9 @@ export default function TodoList({todos}){
         <TodoItem
           key={todo.id}
           title={todo.title}
+          completed={todo.completed}
+          onToggleTodo={onToggleTodo}
+          id={todo.id}
         />
       ))}
     </div>

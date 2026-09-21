@@ -1,9 +1,13 @@
-export default function TodoItem({title}) {
+export default function TodoItem({title , id , completed, onToggleTodo}) {
 
      return (
           <>
                <div className="todo-item">
-                    <input type="checkbox" />
+                    <input type="checkbox" 
+                    
+                    checked={completed}
+                    onChange={()=>onToggleTodo(id)}
+                    />
 
                     <span>{title}</span>
 

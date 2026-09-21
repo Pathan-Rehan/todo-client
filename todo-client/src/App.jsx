@@ -45,12 +45,21 @@ function App() {
 
     setInput('');
   };
+  const handleToggleTodo = (id) => {
+  setTodos((prevTodos) =>
+    prevTodos.map((todo) =>
+      todo.id === id
+        ? { ...todo, completed: !todo.completed }
+        : todo
+    )
+  );
+};
   return (
     <main className="todo-container">
       <h1>Todo App</h1>
 
       <TodoForm input={input} setInput={setInput} onAddTodo={handleAddTodo}/>
-      <TodoList todos={todos} />
+      <TodoList todos={todos} onToggleTodo={handleToggleTodo} />
     </main>
   );
 }
