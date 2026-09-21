@@ -21,7 +21,7 @@ function App() {
       completed: true,
     },
   ]
-  
+
 
 
 
@@ -31,7 +31,7 @@ function App() {
   console.log(todos);
 
   const [input, setInput] = useState('');
-
+  const [editingId, setEditingId] = useState(null);
   const handleAddTodo = () => {
     if (!input.trim()) {
       return;
@@ -48,26 +48,45 @@ function App() {
     setInput('');
   };
   const handleToggleTodo = (id) => {
-  setTodos((prevTodos) =>
-    prevTodos.map((todo) =>
-      todo.id === id
-        ? { ...todo, completed: !todo.completed }
-        : todo
-    )
-  );
-};
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id
+          ? { ...todo, completed: !todo.completed }
+          : todo
+      )
+    );
+  };
 
-const handleDeleteTodo = (id) => {
-  setTodos((prevTodos) =>
-    prevTodos.filter((todo) => todo.id !== id)
-  );
-};
+  const handleDeleteTodo = (id) => {
+    setTodos((prevTodos) =>
+      prevTodos.filter((todo) => todo.id !== id)
+    );
+  };
+  const handleEditTodo = (id) => {
+    setEditingId(id);
+  };
+  const handleSaveTodo = (id, newTitle) => {
+    if (!newTitle.trim()) {
+      return;
+    }
+
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id
+          ? { ...todo, title: newTitle }
+          : todo
+      )
+    );
+
+    setEditingId(null);
+  };
   return (
     <main className="todo-container">
       <h1>Todo App</h1>
 
-      <TodoForm input={input} setInput={setInput} onAddTodo={handleAddTodo}/>
-      <TodoList todos={todos} onToggleTodo={handleToggleTodo}   onDeleteTodo={handleDeleteTodo} />
+      <TodoForm input={input} setInput={setInput} onAddTodo={handleAddTodo} />
+      <TodoList todos={todos} onToggleTodo={handleToggleTodo} onDeleteTodo={handleDeleteTodo} onEditTodo={handleEditTodo} editingId={editingId} onSaveTodo={handleSaveTodo}
+      />
     </main>
   );
 }

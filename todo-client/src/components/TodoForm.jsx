@@ -1,4 +1,4 @@
-export default function TodoForm({input,setInput,onAddTodo}) {
+export default function TodoForm({input,setInput,onAddTodo,}) {
 
      return (
           <>
