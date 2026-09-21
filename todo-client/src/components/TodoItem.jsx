@@ -1,4 +1,4 @@
-export default function TodoItem({title , id , completed, onToggleTodo}) {
+export default function TodoItem({title , id , completed, onToggleTodo ,onDeleteTodo}) {
 
      return (
           <>
@@ -12,7 +12,7 @@ export default function TodoItem({title , id , completed, onToggleTodo}) {
                     <span>{title}</span>
 
                     <button>Edit</button>
-                    <button>Delete</button>
+                    <button onClick={() => onDeleteTodo(id)}>Delete</button>
                </div>
           </>
      )

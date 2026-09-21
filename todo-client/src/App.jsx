@@ -21,12 +21,14 @@ function App() {
       completed: true,
     },
   ]
+  
 
 
 
 
 
   );
+  console.log(todos);
 
   const [input, setInput] = useState('');
 
@@ -54,12 +56,18 @@ function App() {
     )
   );
 };
+
+const handleDeleteTodo = (id) => {
+  setTodos((prevTodos) =>
+    prevTodos.filter((todo) => todo.id !== id)
+  );
+};
   return (
     <main className="todo-container">
       <h1>Todo App</h1>
 
       <TodoForm input={input} setInput={setInput} onAddTodo={handleAddTodo}/>
-      <TodoList todos={todos} onToggleTodo={handleToggleTodo} />
+      <TodoList todos={todos} onToggleTodo={handleToggleTodo}   onDeleteTodo={handleDeleteTodo} />
     </main>
   );
 }
