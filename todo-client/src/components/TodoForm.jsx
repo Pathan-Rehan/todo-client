@@ -1,4 +1,4 @@
-export default function TodoForm({input,setInput}) {
+export default function TodoForm({input,setInput,onAddTodo}) {
 
      return (
           <>
@@ -10,7 +10,7 @@ export default function TodoForm({input,setInput}) {
                          onChange={(e)=>setInput(e.target.value)}
                     />
 
-                    <button>Add</button>
+                    <button onClick={onAddTodo}>Add</button>
                </div>
           </>
      )
