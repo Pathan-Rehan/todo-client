@@ -1,4 +1,4 @@
-export default function TodoForm() {
+export default function TodoForm({input,setInput}) {
 
      return (
           <>
@@ -6,6 +6,8 @@ export default function TodoForm() {
                     <input
                          type="text"
                          placeholder="Enter a task..."
+                         value={input}
+                         onChange={(e)=>setInput(e.target.value)}
                     />
 
                     <button>Add</button>
