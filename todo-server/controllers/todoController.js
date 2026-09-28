@@ -35,3 +35,52 @@ export const createTodo = async (req, res) => {
     });
   }
 };
+
+// Update a todo by ID 
+export const updateTodo = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, completed } = req.body;
+
+    const todo = await Todo.findByIdAndUpdate(
+      id,
+      { title, completed },
+      { new: true, runValidators: true }
+    );
+
+    if (!todo) {
+      return res.status(404).json({
+        error: 'Todo not found',
+      });
+    }
+
+    res.status(200).json(todo);
+  } catch (error) {
+    res.status(500).json({
+      error: 'Failed to update todo',
+    });
+  }
+};
+
+// Delete a todo by ID 
+export const deleteTodo = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const todo = await Todo.findByIdAndDelete(id);
+
+    if (!todo) {
+      return res.status(404).json({
+        error: 'Todo not found',
+      });
+    }
+
+    res.status(200).json({
+      message: 'Todo deleted successfully',
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: 'Failed to delete todo',
+    });
+  }
+};
