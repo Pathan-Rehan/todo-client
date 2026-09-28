@@ -1,5 +1,5 @@
 import Todo from '../models/Todo.js';
-
+// This file contains the four CRUD API'S 
 // get all todos 
 export const getTodos = async (req, res) => {
   try {
