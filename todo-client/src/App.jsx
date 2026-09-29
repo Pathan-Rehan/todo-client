@@ -2,7 +2,7 @@ import { useState , useEffect} from 'react';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import './App.css';
-import { getTodos } from './service/api';
+import { getTodos ,  createTodo } from './service/api';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -23,21 +23,22 @@ useEffect(() => {
 
   const [input, setInput] = useState('');
   const [editingId, setEditingId] = useState(null);
-  const handleAddTodo = () => {
-    if (!input.trim()) {
-      return;
-    }
 
-    const newTodo = {
-      id: Date.now(),
-      title: input,
-      completed: false,
-    };
+  // handle Add todo function (add todo to the list and clear the input field )
+const handleAddTodo = async () => {
+  if (!input.trim()) {
+    return;
+  }
+
+  try {
+    const newTodo = await createTodo(input);
 
     setTodos((prevTodos) => [...prevTodos, newTodo]);
-
     setInput('');
-  };
+  } catch (error) {
+    console.error(error);
+  }
+};
   const handleToggleTodo = (id) => {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
