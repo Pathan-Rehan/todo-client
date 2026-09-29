@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import dns from 'dns';
@@ -7,8 +8,9 @@ import todoRoutes from './routes/todoRoutes.js';
 
 dns.setServers(["1.1.1.1","8.8.8.8"]);
 dotenv.config();
-const app = express();
 
+const app = express();
+app.use(cors())
 
 await connectDB();
 

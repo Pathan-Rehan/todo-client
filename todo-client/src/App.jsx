@@ -1,34 +1,25 @@
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import './App.css';
+import { getTodos } from './service/api';
 
 function App() {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      title: 'Learn Node.js',
-      completed: false,
-    },
-    {
-      id: 2,
-      title: 'Build Todo API',
-      completed: false,
-    },
-    {
-      id: 3,
-      title: 'Complete calculator project',
-      completed: true,
-    },
-  ]
+  const [todos, setTodos] = useState([]);
+  // load todos from the get api  ( useEffect is used ) 
+useEffect(() => {
+  const loadTodos = async () => {
+    try {
+      const data = await getTodos();
+      setTodos(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-
-
-
-
-
-  );
-  console.log(todos);
+  loadTodos();
+}, []);
+  
 
   const [input, setInput] = useState('');
   const [editingId, setEditingId] = useState(null);
