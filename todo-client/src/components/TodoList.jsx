@@ -6,11 +6,11 @@ export default function TodoList({todos, onToggleTodo ,onDeleteTodo,onEditTodo,e
     <div className="todo-list">
       {todos.map((todo) => (
         <TodoItem
-          key={todo.id}
+          key={todo._id}
           title={todo.title}
           completed={todo.completed}
           onToggleTodo={onToggleTodo}
-          id={todo.id}
+          id={todo._id}
            onDeleteTodo={onDeleteTodo}
            onEditTodo={onEditTodo}
            editingId={editingId}
