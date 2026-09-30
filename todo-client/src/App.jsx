@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import './App.css';
-import { getTodos, createTodo, updateTodo } from './service/api';
+import { getTodos, createTodo, updateTodo, deleteTodo } from './service/api';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -60,28 +60,40 @@ function App() {
       console.error(error);
     }
   };
-  const handleDeleteTodo = (id) => {
-    setTodos((prevTodos) =>
-      prevTodos.filter((todo) => todo._id !== id)
-    );
+  const handleDeleteTodo = async (id) => {
+    try {
+      await deleteTodo(id);
+
+      setTodos((prevTodos) =>
+        prevTodos.filter((todo) => todo._id !== id)
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
   const handleEditTodo = (id) => {
     setEditingId(id);
   };
-  const handleSaveTodo = (id, newTitle) => {
+  const handleSaveTodo = async (id, newTitle) => {
     if (!newTitle.trim()) {
       return;
     }
 
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo._id === id
-          ? { ...todo, title: newTitle }
-          : todo
-      )
-    );
+    try {
+      const updatedTodo = await updateTodo(id, {
+        title: newTitle.trim(),
+      });
 
-    setEditingId(null);
+      setTodos((prevTodos) =>
+        prevTodos.map((todo) =>
+          todo._id === id ? updatedTodo : todo
+        )
+      );
+
+      setEditingId(null);
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <main className="todo-container">
